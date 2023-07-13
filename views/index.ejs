@@ -1,0 +1,80 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 mt-5">
+      <div class="card">
+        <div class="card-header bg-success text-white text-center">
+          <h2>Add New Student</h2>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" name="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" class="form-control" id="age" name="age" />
+            </div>
+
+            <div class="form-group">
+              <label for="fees">Fees:</label>
+              <input type="text" class="form-control" id="fees" name="fees" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 mt-5">
+      <div class="card">
+        <div class="card-header bg-success text-white text-center">
+          <h2>List Of The Students</h2>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Fees</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% result.forEach((student, index) => { %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= student.name %></td>
+                <td><%= student.age %></td>
+                <td><%= student.fees %></td>
+                <td>
+                  <div class="d-flex">
+                    <a href="/student/edit/<%= student._id %>"
+                      ><button class="btn btn-primary btn-sm me-2">
+                        Edit
+                      </button></a
+                    >
+                    <form
+                      action="/student/delete/<%= student._id %>"
+                      method="post"
+                    >
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>
